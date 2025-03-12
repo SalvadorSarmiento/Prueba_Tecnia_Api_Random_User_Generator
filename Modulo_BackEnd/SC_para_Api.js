@@ -1,26 +1,24 @@
-//Unica funcion para consumir la API "Random User Generator"
 function obtenerPersonas() {
     fetch('https://randomuser.me/api/?results=10')
         .then(response => response.json())
         .then(data => {
-            const lista = document.getElementById('listaPersonas');
-            lista.innerHTML = ''; //Para limpiar la lista cuando hayan nuevos valores.
+            const tabla = document.querySelector("#tablaPersonas tbody");
+            tabla.innerHTML = ''; // Limpiar la tabla antes de agregar nuevos datos
 
             data.results.forEach(person => {
-                const card = document.createElement('div');
-                card.classList.add('card');
+                const fila = document.createElement('tr');
 
-                card.innerHTML = `
-                    <h3>${person.name.first} ${person.name.last}</h3> 
-                    <p><strong>Género:</strong> ${person.gender}</p>
-                    <p><strong>Ubicación:</strong> ${person.location.city}, ${person.location.country}</p>
-                    <p><strong>Correo:</strong> ${person.email}</p>
-                    <p><strong>Fecha de nacimiento:</strong> ${new Date(person.dob.date).toLocaleDateString()}</p>
-                    <img src="${person.picture.medium}" alt="Foto de ${person.name.first}">
+                fila.innerHTML = `
+                    <td><img src="${person.picture.medium}" alt="Foto de ${person.name.first}"></td>
+                    <td>${person.name.first} ${person.name.last}</td>
+                    <td>${person.gender}</td>
+                    <td>${person.location.city}, ${person.location.country}</td>
+                    <td>${person.email}</td>
+                    <td>${new Date(person.dob.date).toLocaleDateString()}</td>
                 `;
-                lista.appendChild(card);
+
+                tabla.appendChild(fila);
             });
         })
-        //Responsable de manejar errores de generación
         .catch(error => console.error('Error al obtener los datos:', error));
 }
