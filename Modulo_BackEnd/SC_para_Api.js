@@ -1,9 +1,10 @@
+//Unica funcion responsable de consumir y generar con la Api
 function obtenerPersonas() {
     fetch('https://randomuser.me/api/?results=10')
         .then(response => response.json())
         .then(data => {
             const tabla = document.querySelector("#tablaPersonas tbody");
-            tabla.innerHTML = ''; // Limpiar la tabla antes de agregar nuevos datos
+            tabla.innerHTML = ''; // Limpiar la tabla antes de agregar nuevos datos generados
 
             data.results.forEach(person => {
                 const fila = document.createElement('tr');
@@ -20,5 +21,6 @@ function obtenerPersonas() {
                 tabla.appendChild(fila);
             });
         })
+        //Para alcanzar cualquier error
         .catch(error => console.error('Error al obtener los datos:', error));
 }
