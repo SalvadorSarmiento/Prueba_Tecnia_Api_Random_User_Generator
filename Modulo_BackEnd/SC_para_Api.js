@@ -9,12 +9,12 @@ function obtenerPersonas() {
                 const fila = document.createElement('tr');
 
                 fila.innerHTML = `
-                    <td><img src="${person.picture.medium}" alt="Foto de ${person.name.first}"></td>
                     <td>${person.name.first} ${person.name.last}</td>
                     <td>${person.gender}</td>
                     <td>${person.location.city}, ${person.location.country}</td>
                     <td>${person.email}</td>
                     <td>${new Date(person.dob.date).toLocaleDateString()}</td>
+                    <td><img src="${person.picture.medium}" alt="Foto de ${person.name.first}"></td>
                 `;
 
                 tabla.appendChild(fila);
